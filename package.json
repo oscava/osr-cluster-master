@@ -1,0 +1,33 @@
+{
+  "name": "osr-cluster-master",
+  "version": "0.1.2",
+  "description": "osr-cluster-master",
+  "main": "bin/osr-cluster",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oscava/osr-cluster-master.git"
+  },
+  "keywords": [
+    "osr",
+    "cluster",
+    "master"
+  ],
+  "author": "cava.zhang",
+  "license": "ISC",
+  "preferGlobal": true,
+  "bin": {
+    "osr-cluster": "./bin/osr-cluster"
+  },
+  "bugs": {
+    "url": "https://github.com/oscava/osr-cluster-master/issues"
+  },
+  "homepage": "https://github.com/oscava/osr-cluster-master#readme",
+  "dependencies": {
+    "osr-class": "*",
+    "osr-cluster": "*",
+    "osr-cluster-ui": "*"
+  }
+}

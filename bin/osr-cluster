@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+var program = require("commander");
+var json = require("../package.json");
+var Class = require("osr-class");
+var Cluster = require("osr-cluster");
+var ClusterUI = require("osr-cluster-ui");
+program
+	.version(json.version)
+	.usage('[options] <params>')
+	.option('-m, --master <master>','Using the Master')
+	.option('-p, --port <port>',"The Master's port, default port:6110")
+	.option('-start, --start',"Start The Master")
+	.option('-stop, --stop',"Stop The Master")
+	.option('-ui, --ui',"Stop The Master")
+	.parse(process.argv);
+	
+var Master = Class.extends({
+	$:function(program){
+		this.program = program;
+		if(this.program.start){
+			this.start(this.program.port);
+		}else if(this.program.stop){
+			this.stop();
+		}else if(this.program.ui){
+			this.ui();
+		}else{
+			console.log("Plz,Enter osr-cluster -h and read more~~~Orz");
+		}
+	},
+	start:function(port){
+		this.port = port || 6110;
+		this.cluster = Cluster.getInstance();
+		var msg = this.cluster.start({port:this.port});
+		console.log("[MSG]\t[START]\t",msg);
+	},
+	stop:function(){
+		this.cluster = Cluster.getInstance();
+		var msg = this.cluster.stop();
+		console.log("[MSG]\t[STOP]\t",msg);
+	},
+	ui:function(){
+		this.clusterui = ClusterUI.getInstance();
+		var msg = this.clusterui.start();
+		console.log("[MSG]\t[UI]\t",msg);
+	}
+})
+
+module.exports = exports = new Master(program);
